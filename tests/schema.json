@@ -1,0 +1,13 @@
+{
+    "properties": {
+        "test": {
+            "type": "integer"
+        },
+        "another": {
+            "type": "integer"
+        },
+        "again": {
+            "type": "number"
+        }
+    }
+}
