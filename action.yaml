@@ -1,0 +1,39 @@
+name: 'Suggest strand version'
+description: "Suggest the new semantic version for an updated JSON schema."
+author: 'cortadocodes'
+branding:
+  icon: anchor
+  color: red
+
+inputs:
+  token:
+    description: 'A Strands access token with permission to create a strand version for the given strand.'
+    required: true
+  account:
+    description: 'The account handle of the strand the new JSON schema should be compared against.'
+    required: true
+  name:
+    description: 'The name of the the strand the new JSON schema should be compared against.'
+    required: true
+  path:
+    description: 'The path to the JSON schema to to use (relative to the repository root).'
+    required: true
+
+outputs:
+  version:
+    description: 'The suggested version for the JSON schema.'
+  is_breaking_change:
+    description: 'Whether the new version represents a breaking change.'
+  is_new_feature:
+    description: 'Whether the new version represents a new feature.'
+  is_patch_change:
+    description: 'Whether the new version represents a patch change (e.g. bug fix, description change).'
+
+runs:
+   using: 'docker'
+   image: 'docker://octue/suggest-strand-version:0.1.0-beta.0'
+   args:
+     - ${{ inputs.token }}
+     - ${{ inputs.account }}
+     - ${{ inputs.name }}
+     - ${{ inputs.path }}
